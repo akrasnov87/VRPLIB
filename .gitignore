@@ -421,3 +421,8 @@ statistics/*.csv
 *.DS_STORE
 notes.org
 old/
+
+# my
+example.vrp
+__test.py
+osm_distance.py

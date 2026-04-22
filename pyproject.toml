@@ -1,9 +1,9 @@
 [project]
-name = "vrplib"
+name = "vrplib-red"
 version = "2.3.0a"
 description = "Python library for reading and writing VRP instances."
 authors = [
-    { name = "Leon Lan", email = "leon.lanyidong@gmail.com" },
+    { name = "Aleksandr Krasnov", email = "akrasnov87@gmail.com" },
 ]
 license = "MIT"
 license-files = ["LICENSE.md"]
@@ -25,12 +25,12 @@ dependencies = [
     "numpy>=1.26.0; python_version >= '3.12'",
 ]
 readme = "README.md"
-repository = "https://github.com/PyVRP/VRPLIB"
+repository = "https://github.com/akrasnov87/VRPLIB"
 
 
 [project.urls]
-source = "https://github.com/PyVRP/VRPLIB"
-issues = "https://github.com/PyVRP/VRPLIB/issues"
+source = "https://github.com/akrasnov87/VRPLIB"
+issues = "https://github.com/akrasnov87/VRPLIB/issues"
 
 
 [dependency-groups]

@@ -230,3 +230,80 @@ Reading the above example solution returns the following dictionary:
 ### Other remarks
 - In the literature, some instances use rounding conventions different from what is specified in the instance. For example, X instance set proposed by [Uchoa et al. (2017)](http://vrp.atd-lab.inf.puc-rio.br/index.php/en/new-instances) assumes that the distances are rounded to the nearest integer. When you use the `vrplib` package to read this instance, it will return non-rounded Euclidean distances because the instance specifies the `EUC_2D` edge weight type which implies no rounding. To adhere to the convention used in the literature, you can manually round the distances matrix.
 - For large instances (>5000 customers) it's recommended to set the `compute_edge_weights` argument to `False` in `read_instance`.
+
+## Описание
+
+Fork. Добавлена возможность вычисления расстояние собственным методом. Для этого в `EDGE_WEIGHT_TYPE` передать `CUSTOM`
+
+<pre>
+def osm_distance(node_coord: np.ndarray) -> np.ndarray:
+  ...
+  return distance_matrix
+...
+
+from vrplib import read
+
+from osm_distance import osm_distance
+
+instance = read.read_instance('example.vrp', custom_distances=osm_distance)
+print(instance)
+</pre>
+
+### Получение последней версии
+
+<pre>
+git remote add upstream https://github.com/PyVRP/VRPLIB.git
+git pull upstream v2.2.0
+</pre>
+
+## Подготовка к запуску
+
+<pre>
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+</pre>
+
+## Сборка
+
+Убедитесь, что у вас установлены необходимые инструменты:
+<pre>
+# Установка uv (рекомендуется, т.к. вы используете uv_build)
+pip install uv
+
+# Или установка build и twine
+pip install build twine
+</pre>
+
+Сборка проекта
+
+<pre>
+# Очистка предыдущих сборок
+rm -rf dist/ build/ *.egg-info
+
+# Сборка с использованием uv
+uv build
+
+# Или с использованием стандартного build
+python -m build
+</pre>
+
+Публикация на PyPI.org
+
+<pre>
+python -m twine upload dist/*
+</pre>
+
+или установить из локальной папки
+
+<pre>
+# Установка из wheel файла
+pip install dist/vrplib_red-2.3.0a0-py3-none-any.whl
+
+# Или из tar.gz архива
+pip install dist/vrplib-2.3.0a0.tar.gz
+
+# Установка в режиме разработки (editable install)
+# Из корня проекта (где находится pyproject.toml)
+pip install -e .
+</pre>

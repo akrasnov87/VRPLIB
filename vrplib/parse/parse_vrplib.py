@@ -8,7 +8,7 @@ from .parse_utils import infer_type, text2lines
 Instance = dict[str, str | float | np.ndarray]
 
 
-def parse_vrplib(text: str, compute_edge_weights: bool = True) -> Instance:
+def parse_vrplib(text: str, compute_edge_weights: bool = True, custom_distances: any = None) -> Instance:
     """
     Parses a VRPLIB instance. An instance consists of two parts:
     1) Specifications: single line of the form <KEY>:<VALUE>.
@@ -26,6 +26,8 @@ def parse_vrplib(text: str, compute_edge_weights: bool = True) -> Instance:
     compute_edge_weights
         Whether to compute edge weights from the node coordinates.
         Defaults to True.
+    custom_distances
+        Собственная функция вычисления расстояния
 
     Returns
     -------
@@ -50,7 +52,7 @@ def parse_vrplib(text: str, compute_edge_weights: bool = True) -> Instance:
 
     if instance and compute_edge_weights and "edge_weight" not in instance:
         # Compute edge weights if there was no explicit edge weight section
-        edge_weights = parse_distances([], **instance)  # type: ignore
+        edge_weights = parse_distances([], custom_distances=custom_distances, **instance)  # type: ignore
         instance["edge_weight"] = edge_weights
 
     return instance

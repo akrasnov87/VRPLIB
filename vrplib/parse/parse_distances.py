@@ -7,6 +7,7 @@ def parse_distances(
     edge_weight_format: str | None = None,
     node_coord: np.ndarray | None = None,
     comment: str | None = None,
+    custom_distances: any = None,
     **kwargs: float | str | np.ndarray,
 ) -> np.ndarray:
     """
@@ -27,6 +28,8 @@ def parse_distances(
         The customer location coordinates.
     comment, optional
         The comment specification in the instance.
+    custom_distances, optional
+        Собственная функция вычисления расстояния
     **kwargs, optional
         Optional keyword arguments.
 
@@ -63,6 +66,9 @@ def parse_distances(
 
         if edge_weight_format == "FULL_MATRIX":
             return np.array(data)
+    
+    if edge_weight_type == "CUSTOM":
+        return custom_distances(node_coord)
 
     raise ValueError("Edge weight type or format unknown.")
 

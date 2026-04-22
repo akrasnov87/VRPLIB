@@ -8,6 +8,7 @@ def read_instance(
     path: str | os.PathLike,
     instance_format: str = "vrplib",
     compute_edge_weights: bool = True,
+    custom_distances: any = None
 ) -> dict[str, Any]:
     """
     Reads the instance from the passed-in file path.
@@ -21,6 +22,8 @@ def read_instance(
     compute_edge_weights
         Whether to calculate edge weights based on instance specifications
         and node coordinates, if not explicitly provided. Defaults to True.
+    custom_distances
+        Собственная функция вычисления расстояния
 
     Returns
     -------
@@ -28,7 +31,7 @@ def read_instance(
     """
     with open(path, "r") as fi:
         if instance_format == "vrplib":
-            return parse_vrplib(fi.read(), compute_edge_weights)
+            return parse_vrplib(fi.read(), compute_edge_weights, custom_distances)
 
         if instance_format == "solomon":
             return parse_solomon(fi.read(), compute_edge_weights)
