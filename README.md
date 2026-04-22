@@ -298,7 +298,7 @@ python -m twine upload dist/*
 
 <pre>
 # Установка из wheel файла
-pip install dist/vrplib_red-2.3.0a0-py3-none-any.whl
+pip install dist/vrplib-2.3.0a0-py3-none-any.whl
 
 # Или из tar.gz архива
 pip install dist/vrplib-2.3.0a0.tar.gz

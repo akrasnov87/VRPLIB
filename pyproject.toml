@@ -1,5 +1,5 @@
 [project]
-name = "vrplib-red"
+name = "vrplib"
 version = "2.3.0a"
 description = "Python library for reading and writing VRP instances."
 authors = [
