@@ -115,7 +115,14 @@ def parse_section(
     """
     # Some section names include colons, so we strip those as well.
     name = lines[0].strip(" :").removesuffix("_SECTION").lower()
-    rows = [[infer_type(n) for n in line.split()] for line in lines[1:]]
+
+    # Собственное поле для наименования клиента
+    if name == "client_names":
+        rows = [[infer_type(n) for n in line.split(maxsplit=1)] for line in lines[1:]]
+        data = [row[1:][0] for row in rows]
+        return name, data
+    else:
+        rows = [[infer_type(n) for n in line.split()] for line in lines[1:]]
 
     if name == "edge_weight":
         # Parse edge weights separately as it involves extra processing.
